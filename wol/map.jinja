@@ -1,0 +1,17 @@
+{% set datamap = salt['grains.filter_by']({
+  'Debian': {
+    'server': {
+      'pkgs': [
+        'ethtool',
+        'acpi-support',
+      ],
+      'acpi_support_default_file': '/etc/default/acpi-support',
+      'acpi_support_default_template': 'salt://wol/templates/acpi-support-default.jinja',
+    },
+    'client': {
+      'pkgs': [
+        'gwakeonlan'
+      ],
+    }
+  },
+}, merge=salt['pillar.get']('acpi:lookup')) %}
